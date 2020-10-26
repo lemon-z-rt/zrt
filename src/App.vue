@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import { Indicator } from 'mint-ui';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+   
+  },
+  data() {
+    return {
+      timer:''
+    }
+  },
+  methods: {
+    loading(){
+    Indicator.open({
+     text: '加载中...',
+    spinnerType: 'fading-circle'
+        })
+       },
+    },
+    mounted() {
+     this.loading()
+    this.timer=setTimeout(()=>{
+         Indicator.close();
+    },500)
+ },   
 }
+ 
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* 将公共的css引入进来 */
+@import "./fonts/iconfont.css";
+@import "./style/common.css";
 </style>
